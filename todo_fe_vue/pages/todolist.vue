@@ -1,50 +1,60 @@
 <template>
   <div>
-    <v-list :rounded="rounded">
-      <v-list-item-group color="primary">
-        <v-list-item v-for="(item, index) in postList" :key="index">
-          <!-- CheckBox Button -->
-          <v-list-item-action>
-            <v-btn v-if="item.checkbox" icon>
-              <v-icon color="grey lighten-1">mdi-checkbox-intermediate</v-icon>
-            </v-btn>
-            <v-btn v-else icon>
-              <v-icon color="grey lighten-1">mdi-checkbox-blank-outline</v-icon>
-            </v-btn>
-          </v-list-item-action>
+    <!-- TODO: 인풋 컴포넌트로 뺄까? -->
+    <!-- TODO: 중요/완료/미완료로 분류 가능하게. -->
 
-          <!-- Contents-->
-          <v-list-item-content>
-            <v-list-item-title :class="{ textCompleted: item.checkbox }">{{
-              item.content
-            }}</v-list-item-title>
-            <v-list-item-subtitle>woobeom / woobeom</v-list-item-subtitle>
-          </v-list-item-content>
+    <!-- TodoList Input -->
+    <v-container>
+      <v-card>
+        <v-card-text>
+          <v-textarea label="내용 입력" outlined />
+        </v-card-text>
 
-          <!-- Delete Button -->
-          <v-list-item-action>
-            <v-btn icon>
-              <v-icon color="grey lighten-1">mdi-trash-can</v-icon>
-            </v-btn>
-          </v-list-item-action>
-        </v-list-item>
-      </v-list-item-group>
-    </v-list>
+        <v-card-actions>
+          <v-spacer />
+          <v-btn>Addo</v-btn>
+          <v-btn>Cleardo</v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-container>
+
+    <!-- TodoList Cards -->
+    <v-container>
+      <v-row>
+        <v-col v-for="p in todoItems" :key="p.idx" cols="3">
+          <!-- TODO: 카드 크기 고정 필요 -->
+          <!-- TODO: 휴지통 + 휴지통 비우기 -->
+          <todo-list-cards :todoItem="p" />
+        </v-col>
+      </v-row>
+    </v-container>
   </div>
 </template>
 
 <script>
+import TodoListCards from '~/components/TodoListCards'
 export default {
-  data() {
-    return {
-      rounded: true,
-    }
+  components: {
+    TodoListCards,
   },
 
-  computed: {
-    postList() {
-      return this.$store.state.postList
-    },
+  data() {
+    return {
+      todoItems: [
+        {
+          idx: 1,
+          content: 'woobeom1',
+          textCompleted: true,
+          important: true,
+        },
+        {
+          idx: 2,
+          content: 'woobeom2',
+          textCompleted: false,
+          important: false,
+        },
+      ],
+    }
   },
 }
 </script>
