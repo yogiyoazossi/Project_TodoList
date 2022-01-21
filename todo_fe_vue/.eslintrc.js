@@ -2,7 +2,7 @@ module.exports = {
   root: true,
   env: {
     browser: true,
-    ode: true,
+    mode: true,
   },
   parserOptions: {
     parser: '@babel/eslint-parser',
@@ -12,6 +12,6 @@ module.exports = {
   plugins: [],
   // add your custom rules here
   rules: {
-    'vue/attribute-hyphenation': off,
+    'vue/attribute-hyphenation': false,
   },
 }

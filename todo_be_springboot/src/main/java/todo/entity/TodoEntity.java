@@ -30,32 +30,22 @@ public class TodoEntity {
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	public Integer todoIdx;
 	
-	
-	@Column(nullable=false)
-	public String todoTitle;
-	
-	
 	@Column(nullable=true)
 	private String todoContent;
 	
 	@UpdateTimestamp
 	@Column(nullable=false)
-	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss", timezone = "Asia/Seoul")
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy.MM.dd HH:mm", timezone = "Asia/Seoul")
 	private LocalDateTime todoUpdatedDatetime;
 	
 	@CreationTimestamp
 	@Column(nullable=false)
-	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss", timezone = "Asia/Seoul")
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy.MM.dd HH:mm", timezone = "Asia/Seoul")
 	private LocalDateTime todoCreatedDatetime;
 	
-	@Column(nullable=false)
-	private int todoCompleted;
+	@Column(nullable=true)
+	private Boolean todoImportant;
 	
-	@Column(nullable=false)
-	private int todoImportance;
-	
-	
-	public TodoEntity(String todoTitle) {
-		this.setTodoTitle(todoTitle);
-	}
+	@Column(nullable=true)
+	private Boolean todoCompleted;
 }
