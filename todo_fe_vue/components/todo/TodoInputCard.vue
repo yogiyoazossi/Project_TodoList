@@ -1,13 +1,13 @@
 <template>
   <div>
-    <v-card height="340">
+    <v-card height="323">
       <v-container>
         <v-form ref="form" v-model="valid" @submit.prevent="addTodoSubmitForm">
           <v-textarea
             v-model="content"
             label="내용 입력"
             outlined
-            height="270"
+            height="250"
             style="margin-bottom: -30px"
           />
           <v-card-actions>

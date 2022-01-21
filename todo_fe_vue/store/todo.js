@@ -118,7 +118,6 @@ export const actions = {
 
   // components/todo/BtnEditTodo.vue
   async editTodo({ commit }, payload) {
-    console.log('editTodo actions', payload)
     await this.$axios
       .put('http://localhost:8080/update/' + payload.todoIdx, {
         todoIdx: payload.todoIdx,
