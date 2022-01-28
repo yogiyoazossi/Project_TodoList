@@ -60,4 +60,29 @@ public class TodoController {
     	todoEntity.setTodoIdx(todoIdx);
 		return todoService.updateTodo(todoEntity);
 	}
+    
+    // todoUpdatedDatetime로 정렬
+    @CrossOrigin(origins="*")
+    @RequestMapping(value = "/lists/updatedtime", method=RequestMethod.GET)
+    public List<TodoEntity> selectTodoListOrderByUpdateDatetime() throws Exception {
+    	List<TodoEntity> list = todoService.selectTodoListOrderByUpdateDatetime();
+    	return list;
+    }
+    
+    // todoImportant=true 만 표시
+    @CrossOrigin(origins="*")
+    @RequestMapping(value = "/lists/important", method=RequestMethod.GET)
+    public List<TodoEntity> selectTodoListOrderByImportant() throws Exception {
+    	List<TodoEntity> list = todoService.selectTodoListOrderByImportant();
+    	return list;
+    }
+    
+    
+    // todoCompleted=true 만 표시
+    @CrossOrigin(origins="*")
+    @RequestMapping(value = "/lists/completed", method=RequestMethod.GET)
+    public List<TodoEntity> selectTodoListOrderByCompleted() throws Exception {
+    	List<TodoEntity> list = todoService.selectTodoListOrderByCompleted();
+    	return list;
+    }
 }

@@ -1,34 +1,6 @@
 export const state = () => ({
   alert: false,
-  // todoItems: [
-  //   {
-  //     todoIdx: 1,
-  //     todoTitle: '1',
-  //     todoContent: '1',
-  //     todoCreatedDatetime: '2021-10-12 07:22',
-  //     todoUpdatedDatetime: '2021-10-12 07:22',
-  //     todoImportant: false,
-  //     todoCompleted: true,
-  //   },
-  //   {
-  //     todoIdx: 6,
-  //     todoTitle: '5',
-  //     todoContent: 'qwe',
-  //     todoCreatedDatetime: '2021-11-30 08:09',
-  //     todoUpdatedDatetime: '2021-11-30 08:09',
-  //     todoImportant: true,
-  //     todoCompleted: true,
-  //   },
-  //   {
-  //     todoIdx: 4,
-  //     todoTitle: '2',
-  //     todoContent: 'fasfasfasfas',
-  //     todoCreatedDatetime: '2021-11-30 08:02',
-  //     todoUpdatedDatetime: '2021-11-30 08:02',
-  //     todoImportant: true,
-  //     todoCompleted: false,
-  //   },
-  // ],
+  menu: 1,
 
   todoItems: [],
 })
@@ -73,6 +45,10 @@ export const mutations = {
   toggleAlert(state) {
     state.alert = !state.alert
   },
+
+  changeMenu(state, payload) {
+    state.menu = payload
+  },
 }
 
 export const actions = {
@@ -80,6 +56,33 @@ export const actions = {
   loadTodoItems({ commit }, payload) {
     this.$axios
       .get('http://localhost:8080/lists')
+      .then((res) => {
+        commit('loadTodoItems', res.data)
+      })
+      .catch(() => {})
+  },
+
+  loadTodoItemsOrderByUpdatedDatetime({ commit }, payload) {
+    this.$axios
+      .get('http://localhost:8080/lists/updatedtime')
+      .then((res) => {
+        commit('loadTodoItems', res.data)
+      })
+      .catch(() => {})
+  },
+
+  loadTodoItemsOrderByImportant({ state, commit }, payload) {
+      this.$axios
+        .get('http://localhost:8080/lists/important')
+        .then((res) => {
+          commit('loadTodoItems', res.data)
+        })
+        .catch(() => {})
+  },
+
+  loadTodoItemsOrderByCompleted({ commit }, payload) {
+    this.$axios
+      .get('http://localhost:8080/lists/completed')
       .then((res) => {
         commit('loadTodoItems', res.data)
       })

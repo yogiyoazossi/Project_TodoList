@@ -13,7 +13,12 @@ public interface TodoService {
 	void saveTodo(TodoEntity todoEntity) throws Exception;
 	
 	void deleteTodo(Integer todoIdx) throws Exception;
-	
-//	void updateTodo(Integer todoIdx, String todoConetnt) throws Exception;
+
 	public TodoEntity updateTodo(TodoEntity todoEntity) throws Exception;
+		
+	public List<TodoEntity> selectTodoListOrderByUpdateDatetime() throws Exception;
+	
+	public List<TodoEntity> selectTodoListOrderByImportant() throws Exception;
+	
+	public List<TodoEntity> selectTodoListOrderByCompleted() throws Exception;
 }

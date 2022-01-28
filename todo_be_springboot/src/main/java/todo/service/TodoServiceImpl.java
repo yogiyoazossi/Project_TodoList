@@ -16,16 +16,19 @@ public class TodoServiceImpl implements TodoService {
 	@Autowired
 	TodoRepository todoRepository;
 	
+	
 	@Override
 	public List<TodoEntity> selectTodoList() throws Exception {
 		return todoRepository.findAllByOrderByTodoIdxDesc();
 	}	
+	
 	
 	@Override
 	public Optional<TodoEntity> detailTodoList(Integer todoIdx) throws Exception {
 		Optional<TodoEntity> todoEntity = todoRepository.findById(todoIdx);
 		return todoEntity;
 	}
+	
 	
 	@Override
 	public void saveTodo(TodoEntity todoEntity) throws Exception {
@@ -34,14 +37,34 @@ public class TodoServiceImpl implements TodoService {
 		todoRepository.save(todoEntity);
 	}
 	
+	
 	@Override
 	public void deleteTodo(Integer todoIdx) throws Exception {
 		todoRepository.deleteById(todoIdx);
 	}
 	
+	
 	@Override
 	public TodoEntity updateTodo(TodoEntity todoEntity) throws Exception {
 		return todoRepository.save(todoEntity);
+	}
+	
+	
+	@Override
+	public List<TodoEntity> selectTodoListOrderByUpdateDatetime() throws Exception {
+		return todoRepository.findAllByOrderByTodoUpdatedDatetimeDesc();
+	}
+	
+	
+	@Override
+	public List<TodoEntity> selectTodoListOrderByImportant() throws Exception {
+		return todoRepository.findByTodoImportantTrue();
+	}
+	
+	
+	@Override
+	public List<TodoEntity> selectTodoListOrderByCompleted() throws Exception {
+		return todoRepository.findByTodoCompletedTrue();
 	}
 	
 }

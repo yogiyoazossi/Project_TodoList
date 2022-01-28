@@ -4,10 +4,10 @@
     <!-- TODO: 중요/완료/미완료로 분류 가능하게. -->
     <v-container>
       <v-row>
-        <v-col cols="3">
+        <v-col cols="4">
           <todo-input-card />
         </v-col>
-        <v-col v-for="p in todoItems" :key="p.idx" cols="3">
+        <v-col v-for="p in todoItems" :key="p.idx" cols="4">
           <!-- TODO: 휴지통 + 휴지통 비우기 -->
           <todo-list-cards :todoItem="p" />
         </v-col>
@@ -37,7 +37,7 @@ export default {
 
   fetch({ store }) {
     // store.dispatch('todo/loadTodoItems')
-    store.dispatch('todo/loadTodoItems')
+    store.dispatch('todo/loadTodoItemsOrderByCompleted')
   },
 
   computed: {
@@ -48,8 +48,9 @@ export default {
 
   mounted() {
     // this.$store.dispatch('todo/loadTodoItems')
-    this.$store.dispatch('todo/loadTodoItems')
+    this.$store.dispatch('todo/loadTodoItemsOrderByCompleted')
   },
+
 }
 </script>
 
