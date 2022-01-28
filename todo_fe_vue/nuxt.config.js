@@ -16,6 +16,10 @@ export default {
     ]
   },
 
+  env: {
+    apiURL: process.env.apiURL || 'http://localhost:8080'
+  },
+
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: [
   ],

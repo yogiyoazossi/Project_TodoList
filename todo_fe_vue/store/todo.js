@@ -1,6 +1,6 @@
 export const state = () => ({
   alert: false,
-  menu: 1,
+  menu: 4,
 
   todoItems: [],
 })
@@ -55,7 +55,7 @@ export const actions = {
   // pages/Todolist.vue
   loadTodoItems({ commit }, payload) {
     this.$axios
-      .get('http://localhost:8080/lists')
+      .get(process.env.apiURL + '/lists')
       .then((res) => {
         commit('loadTodoItems', res.data)
       })
@@ -64,7 +64,7 @@ export const actions = {
 
   loadTodoItemsOrderByUpdatedDatetime({ commit }, payload) {
     this.$axios
-      .get('http://localhost:8080/lists/updatedtime')
+      .get(process.env.apiURL + '/lists/updatedtime')
       .then((res) => {
         commit('loadTodoItems', res.data)
       })
@@ -72,17 +72,17 @@ export const actions = {
   },
 
   loadTodoItemsOrderByImportant({ state, commit }, payload) {
-      this.$axios
-        .get('http://localhost:8080/lists/important')
-        .then((res) => {
-          commit('loadTodoItems', res.data)
-        })
-        .catch(() => {})
+    this.$axios
+      .get(process.env.apiURL + '/lists/important')
+      .then((res) => {
+        commit('loadTodoItems', res.data)
+      })
+      .catch(() => {})
   },
 
   loadTodoItemsOrderByCompleted({ commit }, payload) {
     this.$axios
-      .get('http://localhost:8080/lists/completed')
+      .get(process.env.apiURL + '/lists/completed')
       .then((res) => {
         commit('loadTodoItems', res.data)
       })
@@ -92,7 +92,7 @@ export const actions = {
   // components/todo/TodoInput.vue
   async addTodo({ commit }, payload) {
     await this.$axios
-      .post('http://localhost:8080/post', {
+      .post(process.env.apiURL + '/post', {
         todoContent: payload.todoContent,
       })
       .then((res) => {
@@ -122,7 +122,7 @@ export const actions = {
   // components/todo/BtnEditTodo.vue
   async editTodo({ commit }, payload) {
     await this.$axios
-      .put('http://localhost:8080/update/' + payload.todoIdx, {
+      .put(process.env.apiURL + '/update/' + payload.todoIdx, {
         todoIdx: payload.todoIdx,
         todoContent: payload.todoContent,
         todoCompleted: payload.todoCompleted,
@@ -138,7 +138,7 @@ export const actions = {
   // components/todo/TodoListCards.vue
   async removeTodo({ commit }, payload) {
     await this.$axios
-      .delete('http://localhost:8080/delete/' + payload.todoItem.todoIdx)
+      .delete(process.env.apiURL + '/delete/' + payload.todoItem.todoIdx)
       .then((res) => {
         // TODO: 성공했다는 메세지가 필요할듯?
       })
